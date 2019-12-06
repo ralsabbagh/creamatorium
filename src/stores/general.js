@@ -4,6 +4,8 @@ import firebase from "firebase";
 
 class GeneralStore {
   constructor() {
+    console.log("store");
+
     var config = {
       apiKey: "AIzaSyAvv8HXDFBw8IWJHzGLAqpLKJyATrxxryE",
       authDomain: "projectId.firebaseapp.com",
@@ -13,7 +15,7 @@ class GeneralStore {
       storageBucket: "bucket.appspot.com"
     };
     firebase.initializeApp(config);
-
+    this.createOrder = this.createOrder.bind(this);
     this.totalOrdersCount = 0;
     this.ordered = [];
     this.picked = [];
@@ -68,10 +70,13 @@ class GeneralStore {
 
         /// fetch user orders
         this.ordersPerUser = ordersPerUser;
-      });
+      })
+      .bind(this);
   }
 
   createOrder() {
+    console.log("hey");
+
     var orderObject = {
       id: this.totalOrdersCount,
       uid: "",
@@ -109,10 +114,15 @@ class GeneralStore {
       .ref("creamatorium/orders/" + uid + "/status/")
       .set(status);
   }
+
+  test() {
+    console.log("sdsdasdsad");
+  }
 }
 
 decorate(GeneralStore, {
-  //   isLoading: observable
+  userName: observable
 });
+let generalStore = new GeneralStore();
 
-export default GeneralStore;
+export default generalStore;
