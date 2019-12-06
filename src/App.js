@@ -1,24 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
+import Page from './components/page/page.js'
+import OrdersNumbers from './components/ordersNumbers/ordersNumbers.js'
+import Header from './components/header/header.js'
+import Button from './components/button/button.js'
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Page 
+      header={<Header
+        headerTitle={'Creamatorium'}
+      />}
+      body={
+      <div>
+      <OrdersNumbers
+        readyListTitle='ready for pickup'
+        readyList={['1', '2', '3']}
+        preaparingListTitle='being prepared'
+        preaparingList={['1', '2']}
+      ></OrdersNumbers>
+      </div>} />
+      <Button
+      className={'container'}
+      style={{marginTop:'20px'}}
+        text={'Place a New Order'}
+      />
     </div>
   );
 }

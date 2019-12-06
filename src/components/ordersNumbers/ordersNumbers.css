@@ -1,0 +1,12 @@
+
+.OrdersNumbersSection{
+    vertical-align: top;
+    display: inline-block;
+    width: calc(50% - 1px);
+}
+.OrderSectionSeperator{
+    display: inline-block;
+    width: 1px;
+    height: 100%;
+    background-color: lightgray;
+}
