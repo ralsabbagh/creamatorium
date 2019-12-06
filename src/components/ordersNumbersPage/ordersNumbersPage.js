@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './ordersNumbersPage.css';
 import OrdersNumbers from '../ordersNumbers/ordersNumbers.js';
 import Button from '../button/button.js';
+import {
+    Link,
+} from "react-router-dom";
 
 class OrdersNumbersPage extends Component {
     render() {
@@ -12,10 +15,13 @@ class OrdersNumbersPage extends Component {
                 preaparingListTitle='being prepared'
                 preaparingList={['1', '2']}
             ></OrdersNumbers>
-            <Button
-                style={{ marginTop: '20px' }}
-                text={'Place a New Order'}
-            />
+            <Link to={'/user/order/'}>
+                <Button
+                    style={{ marginTop: '20px' }}
+                    text={'Place a New Order'}
+
+                />
+            </Link>
         </div>);
 
     }
