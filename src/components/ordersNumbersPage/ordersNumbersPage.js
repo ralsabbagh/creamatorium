@@ -25,6 +25,6 @@ class OrdersNumbersPage extends Component {
         </div>);
 
     }
-}
+
 
 export default OrdersNumbersPage;
