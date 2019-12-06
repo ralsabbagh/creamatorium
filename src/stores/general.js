@@ -135,5 +135,5 @@ decorate(GeneralStore, {
 })
 
 let generalStore = new GeneralStore();
-generalStore.setUpFireBase();
+// generalStore.setUpFireBase();
 export default generalStore;

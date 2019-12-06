@@ -46,7 +46,7 @@ class orderPage extends Component {
             <Order title={'Creamate your own icecream'}>
                 {this.composeCategories(categories)}
             </Order>
-            <Link to={'/user/'}>
+            <Link to={'/user/success/'}>
                 <Button
                     style={{ marginTop: '20px' }}
                     text={'Submit Order'}

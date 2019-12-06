@@ -2,6 +2,8 @@ import React from 'react';
 import Page from './components/page/page.js'
 import OrdersNumbersPage from './components/ordersNumbersPage/ordersNumbersPage.js'
 import OrderPage from './components/orderPage/orderPage.js'
+import SuccessPage from './components/successPage/successPage.js'
+
 import store from './stores/general.js'
 
 import Header from './components/header/header.js'
@@ -29,6 +31,10 @@ function App() {
               <Route exact path='/user/order/'
                 render={props => <OrderPage />}
               />
+              <Route exact path='/user/success/'
+                render={props => <SuccessPage />}
+              />
+
             </Switch>
           </Router>
         } />
