@@ -2,6 +2,7 @@ import React from 'react';
 import Page from './components/page/page.js'
 import OrdersNumbersPage from './components/ordersNumbersPage/ordersNumbersPage.js'
 import OrderPage from './components/orderPage/orderPage.js'
+import store from './stores/general.js'
 
 import Header from './components/header/header.js'
 import {
@@ -12,6 +13,7 @@ import {
 import './App.css';
 
 function App() {
+  console.log(store);
   return (
     <div className="App">
       <Page
