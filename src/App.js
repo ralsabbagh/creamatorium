@@ -3,6 +3,7 @@ import Page from './components/page/page.js'
 import OrdersNumbersPage from './components/ordersNumbersPage/ordersNumbersPage.js'
 import OrderPage from './components/orderPage/orderPage.js'
 import SuccessPage from './components/successPage/successPage.js'
+import DashboardOrdersPage from './components/dashboardOrdersPage/dashboardOrdersPage.js'
 
 import store from './stores/general.js'
 
@@ -34,7 +35,9 @@ function App() {
               <Route exact path='/user/success/'
                 render={props => <SuccessPage />}
               />
-
+              <Route exact path='/dashboard/'
+                render={props => <DashboardOrdersPage />}
+              />
             </Switch>
           </Router>
         } />
