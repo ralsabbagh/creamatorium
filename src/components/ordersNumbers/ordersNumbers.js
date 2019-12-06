@@ -11,8 +11,7 @@ class OrdersNumbers extends Component {
     }
 
     render() {
-
-        return (<div className="OrdersNumbers">
+        return (<div className="OrdersNumbers borderedContainer">
             <div className="OrdersNumbersSection">
                 <h3>{this.props.readyListTitle}</h3>
                 {this.composeList(this.props.readyList)}

@@ -1,3 +1,7 @@
+.OrdersNumbers{
+padding: 15px;
+
+}
 
 .OrdersNumbersSection{
     vertical-align: top;
@@ -10,3 +14,4 @@
     height: 100%;
     background-color: lightgray;
 }
+

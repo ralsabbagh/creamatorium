@@ -1,32 +1,30 @@
 import React from 'react';
 import Page from './components/page/page.js'
-import OrdersNumbers from './components/ordersNumbers/ordersNumbers.js'
+import OrdersNumbersPage from './components/ordersNumbersPage/ordersNumbersPage.js'
 import Header from './components/header/header.js'
-import Button from './components/button/button.js'
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Page 
-      header={<Header
-        headerTitle={'Creamatorium'}
-      />}
-      body={
-      <div>
-      <OrdersNumbers
-        readyListTitle='ready for pickup'
-        readyList={['1', '2', '3']}
-        preaparingListTitle='being prepared'
-        preaparingList={['1', '2']}
-      ></OrdersNumbers>
-      </div>} />
-      <Button
-      className={'container'}
-      style={{marginTop:'20px'}}
-        text={'Place a New Order'}
-      />
+      <Page
+        header={<Header
+          headerTitle={'Creamatorium'}
+        />}
+        body={
+          <Router>
+            <Switch>
+              <Route exact path='/user/'
+                render={props => <OrdersNumbersPage />}
+              />
+            </Switch>
+          </Router>
+        } />
     </div>
   );
 }
