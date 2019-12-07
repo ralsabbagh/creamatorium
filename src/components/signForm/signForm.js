@@ -10,6 +10,7 @@ class SignForm extends Component {
         return (
             <div className="SignForm">
                 <input className={'formInput'} placeholder={'User Name'} onChange={(e) => { this.props.storeUserName(e) }} />
+                {this.props.storeEmail ? <input className={'formInput'} placeholder={'Email Address'} onChange={(e) => { this.props.storeEmail(e) }} /> : null}
                 <input className={'formInput'} placeholder={'Password'} onChange={(e) => { this.props.storePassword(e) }} type={'password'} />
                 <Button text={this.props.buttonText} onClick={() => { this.props.action() }} />
                 {this.props.link ?
