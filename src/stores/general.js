@@ -1,6 +1,4 @@
-
-
-import { decorate, observable, computed } from 'mobx';
+import { decorate, observable, computed } from "mobx";
 import firebase from "firebase";
 
 class GeneralStore {
@@ -26,39 +24,63 @@ class GeneralStore {
     this.userID = "01011";
     this.userName = "Hmmmm";
     this.canSubmit = false;
-    this.categories = [{
-      title: 'Base (required)',
-      options: ['Vanilla', 'Chocolate', 'Coffee', 'Mango', 'Strawberry', 'Lemon'],
-      optionsSelections: [false, false, false, false, false, false]
-
-    },
-    {
-      title: 'Nuts',
-      options: ['Almonds', 'Pistachios', 'Walnuts', 'Cashews', 'Pecans', 'Hazelnuts'],
-      optionsSelections: [false, false, false, false, false, false]
-
-    },
-    {
-      title: 'Sauces',
-      options: ['Chocolate', ' Salted Caramel', 'Toffee', 'Maple'],
-      optionsSelections: [false, false, false, false,]
-
-    },
-    {
-      title: 'Fruits',
-      options: ['Strawberry', 'Mango', 'Raspberry', 'Banana'],
-      optionsSelections: [false, false, false, false,]
-
-    },
-    {
-      title: 'baked yumminess',
-      options: ['Dount', 'Cookies'],
-      optionsSelections: [false, false,]
-
-    },
-
+    this.categories = [
+      {
+        title: "Base (required)",
+        options: [
+          "Vanilla",
+          "Chocolate",
+          "Coffee",
+          "Mango",
+          "Strawberry",
+          "Lemon"
+        ],
+        optionsSelections: [false, false, false, false, false, false]
+      },
+      {
+        title: "Nuts",
+        options: [
+          "Almonds",
+          "Pistachios",
+          "Walnuts",
+          "Cashews",
+          "Pecans",
+          "Hazelnuts"
+        ],
+        optionsSelections: [false, false, false, false, false, false]
+      },
+      {
+        title: "Sauces",
+        options: ["Chocolate", " Salted Caramel", "Toffee", "Maple"],
+        optionsSelections: [false, false, false, false]
+      },
+      {
+        title: "Fruits",
+        options: ["Strawberry", "Mango", "Raspberry", "Banana"],
+        optionsSelections: [false, false, false, false]
+      },
+      {
+        title: "baked yumminess",
+        options: ["Dount", "Cookies"],
+        optionsSelections: [false, false]
+      }
     ];
     this.setUpFireBase();
+
+    this.orderObject = {
+      id: this.totalOrdersCount,
+      uid: "",
+      specification: {
+        base: [""],
+        nuts: [""],
+        sauces: [""],
+        fruits: [""],
+        baked: [""]
+      },
+      status: "Ordered",
+      userID: this.userID,
+      userName: this.userName
+    };
   }
 
   updateUserID(userID) {
@@ -66,13 +88,11 @@ class GeneralStore {
   }
 
   setUpFireBase() {
-
-
     var _this = this;
     firebase
       .database()
       .ref("creamatorium/orders")
-      .on("value", function (snapshot) {
+      .on("value", function(snapshot) {
         _this.totalOrdersCount = snapshot.numChildren();
         /// [filter the orders]
         var ordered = [];
@@ -99,7 +119,6 @@ class GeneralStore {
             cancelled.push(object.val());
           /// fetch user orders
           if (object.val().userID == _this.userID)
-
             ordersPerUser.push(object.val());
 
           if (object.val().status.toLowerCase() == "ready")
@@ -120,9 +139,7 @@ class GeneralStore {
         _this.ordersPerUserReady = ordersPerUserReady;
       })
       .bind(this);
-
   }
-
 
   createOrder() {
     console.log("heyyy");
@@ -134,30 +151,14 @@ class GeneralStore {
 
     console.log(this);
 
-    var orderObject = {
-      id: this.totalOrdersCount,
-      uid: "",
-      specification: {
-        base: [""],
-        nuts: [""],
-        sauces: [""],
-        fruits: [""],
-        baked: [""],
-      },
-      status: "Ordered",
-      userID: this.userID,
-      userName: this.userName
-    };
-
     var uid = firebase
       .database()
       .ref("creamatorium/orders")
-      .push()
-      .key;
+      .push().key;
 
-    orderObject.uid = uid;
+    this.orderObject.uid = uid;
     var updates = {};
-    updates["/creamatorium/orders/" + uid + "/"] = orderObject;
+    updates["/creamatorium/orders/" + uid + "/"] = this.orderObject;
 
     firebase
       .database()
@@ -174,16 +175,62 @@ class GeneralStore {
 
   toppingChanged(categoryIndex, index) {
     console.log(categoryIndex, index);
-    this.categories[categoryIndex].optionsSelections[index] = !this.categories[categoryIndex].optionsSelections[index];
+    this.categories[categoryIndex].optionsSelections[index] = !this.categories[
+      categoryIndex
+    ].optionsSelections[index];
 
-     var canSubmit = 0;
-     this.categories[0].optionsSelections.map((option) => {
-      if (option==true)  canSubmit++;
+    var canSubmit = 0;
+    this.categories[0].optionsSelections.map(option => {
+      if (option == true) canSubmit++;
+    });
 
-     });
+    this.canSubmit = canSubmit > 0 ? true : false;
 
-    this.canSubmit = (canSubmit>0)?true :false; 
-  
+    this.orderObject.specification = {
+      base: [],
+      nuts: [],
+      sauces: [],
+      fruits: [],
+      baked: []
+    };
+    this.categories[0].optionsSelections.map((option, index) => {
+      if (option == true)
+        this.orderObject.specification.base.push(
+          this.categories[0].options[index]
+        );
+    });
+
+    this.categories[1].optionsSelections.map((option, index) => {
+      if (option == true)
+        this.orderObject.specification.nuts.push(
+          this.categories[1].options[index]
+        );
+    });
+
+    this.categories[2].optionsSelections.map((option, index) => {
+      if (option == true)
+        this.orderObject.specification.sauces.push(
+          this.categories[2].options[index]
+        );
+    });
+    this.categories[3].optionsSelections.map((option, index) => {
+      if (option == true)
+        this.orderObject.specification.fruits.push(
+          this.categories[3].options[index]
+        );
+    });
+    this.categories[4].optionsSelections.map((option, index) => {
+      if (option == true)
+        this.orderObject.specification.baked.push(
+          this.categories[4].options[index]
+        );
+    });
+
+    // base: [""],
+    // nuts: [""],
+    // sauces: [""],
+    // fruits: [""],
+    // baked: [""]
   }
 }
 
@@ -202,8 +249,8 @@ decorate(GeneralStore, {
   userName: observable,
   categories: observable,
   optionsSelections: observable,
-  canSubmit:observable,
-})
+  canSubmit: observable
+});
 
 let generalStore = new GeneralStore();
 generalStore.setUpFireBase();
