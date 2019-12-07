@@ -85,6 +85,7 @@ class GeneralStore {
 
   updateUserID(userID) {
     this.userID = userID;
+    this.orderObject.userID = userID;
   }
 
   setUpFireBase() {
