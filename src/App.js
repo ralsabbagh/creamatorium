@@ -4,6 +4,7 @@ import OrdersNumbersPage from './components/ordersNumbersPage/ordersNumbersPage.
 import OrderPage from './components/orderPage/orderPage.js'
 import SuccessPage from './components/successPage/successPage.js'
 import DashboardOrdersPage from './components/dashboardOrdersPage/dashboardOrdersPage.js'
+import { observer } from 'mobx-react';
 
 import store from './stores/general.js'
 
@@ -45,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
