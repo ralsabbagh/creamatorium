@@ -196,6 +196,7 @@ class GeneralStore {
       case "picked":
         break;
       case "ready":
+        this.updateOrderStatus(uid, "picked");
         break;
       case "being":
         this.updateOrderStatus(uid, "ready");

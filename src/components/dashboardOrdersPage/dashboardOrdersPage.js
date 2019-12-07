@@ -13,7 +13,8 @@ class DashboardOrdersPage extends Component {
     button,
     key,
     color,
-    uid
+    uid,
+    status
   ) {
     return (
       <div className="ordersTableHeader" key={key}>
@@ -28,7 +29,7 @@ class DashboardOrdersPage extends Component {
             <Button
               text={orderStatus}
               onClick={() => {
-                this.props.store.orderButtonPressed(uid, orderStatus);
+                this.props.store.orderButtonPressed(uid, status);
               }}
             ></Button>
           ) : (
@@ -61,14 +62,40 @@ class DashboardOrdersPage extends Component {
         specification =
           specification + ", Baked: " + order.specification.baked.join(", ");
 
+      var readableStatus = order.status;
+      switch (order.status.toLowerCase()) {
+        case "ordered":
+          readableStatus = "Start Preparing";
+          break;
+        case "picked":
+          readableStatus = "Picked";
+
+          break;
+        case "ready":
+          readableStatus = "Ready to Pick";
+
+          break;
+        case "being":
+          readableStatus = "Being Prepared";
+          break;
+        case "cancelled":
+          // readableStatus = "Ready to Pick";
+
+          break;
+
+        default:
+          break;
+      }
+
       return this.composeTableRow(
         order.id,
         specification,
-        order.status,
+        readableStatus,
         true,
         index,
         "gray",
-        order.uid
+        order.uid,
+        order.status
       );
     });
   }
