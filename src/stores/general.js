@@ -44,6 +44,10 @@ class GeneralStore {
     this.deleteItem = this.deleteItem.bind(this);
     this.addItem = this.addItem.bind(this);
     this.updateItemName = this.updateItemName.bind(this);
+    this.updateUser = this.updateUser.bind(this);
+    this.updatePassword = this.updatePassword.bind(this);
+    this.updateEmail = this.updateEmail.bind(this);
+    this.registerUser = this.registerUser.bind(this);
   }
 
   setUpFireBase() {
@@ -135,6 +139,46 @@ class GeneralStore {
     _this.currentItemName = e;
     console.log("_this.currentItemName");
     console.log(_this.currentItemName);
+  }
+
+  updateUser(e) {
+    var _this = this;
+    console.log(e);
+
+    _this.currentUser = e;
+  }
+  updatePassword(e) {
+    var _this = this;
+    console.log(e);
+
+    _this.currentPassword = e;
+  }
+  updateEmail(e) {
+    var _this = this;
+    console.log(e);
+
+    _this.currentEmail = e;
+  }
+  registerUser() {
+    var _this = this;
+
+    var uid = firebase
+      .database()
+      .ref("wishlist/users")
+      .push().key;
+    var usr = {
+      email: _this.currentEmail,
+      name: _this.currentUser,
+      password: _this.currentPassword,
+      uid: uid
+    };
+    var updates = {};
+    updates["/wishlist/users/" + uid + "/"] = usr;
+
+    firebase
+      .database()
+      .ref()
+      .update(updates);
   }
 
   updateListStatus(uid, status) {

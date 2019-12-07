@@ -30,14 +30,14 @@ function App() {
                   true ? (
                     <Redirect to="/" />
                   ) : (
-                      <WishListPage
-                        {...props}
-                        wishListItems={store.wishListObject.items}
-                        addItem={store.addItem}
-                        storeItemName={store.updateItemName}
-                        deleteItem={store.deleteItem}
-                      />
-                    )
+                    <WishListPage
+                      {...props}
+                      wishListItems={store.wishListObject.items}
+                      addItem={store.addItem}
+                      storeItemName={store.updateItemName}
+                      deleteItem={store.deleteItem}
+                    />
+                  )
                 }
               />
               <Route
@@ -45,10 +45,10 @@ function App() {
                 render={props => (
                   <PopUp show={true}>
                     <SignForm
-                      storeUserName={e => { }}
-                      storePassword={e => { }}
-                      storeEmail={e => { }}
-                      action={() => { }}
+                      storeUserName={store.updateUser}
+                      storePassword={store.updatePassword}
+                      storeEmail={store.updateEmail}
+                      action={store.registerUser}
                       buttonText="Sign Up"
                     />
                   </PopUp>
@@ -59,9 +59,9 @@ function App() {
                 render={props => (
                   <PopUp show={true}>
                     <SignForm
-                      storeUserName={e => { }}
-                      storePassword={e => { }}
-                      action={() => { }}
+                      storeUserName={e => {}}
+                      storePassword={e => {}}
+                      action={() => {}}
                       buttonText="Sign In"
                       link={"/signup"}
                       linkTitle={"dont have an account?"}
