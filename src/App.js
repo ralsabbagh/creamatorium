@@ -25,7 +25,12 @@ function App() {
           <Router>
             <Switch>
               <Route path='/'
-                render={props => <WishListPage {...props} wishListItems={['Airpods', 'Flowers', 'Candies', 'Neckless']} />}
+                render={props => <WishListPage
+                  {...props}
+                  wishListItems={['Airpods', 'Flowers', 'Candies', 'Neckless']}
+                  addItem={() => { }}
+                  storeItemName={(e) => { }}
+                />}
               />
             </Switch>
           </Router>

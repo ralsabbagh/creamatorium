@@ -9,9 +9,9 @@ class SignForm extends Component {
     render() {
         return (
             <div className="SignForm">
-                <input placeholder={'User Name'} onChange={(e) => { this.props.storeUserName(e) }} />
-                <input placeholder={'Password'} onChange={(e) => { this.props.storePassword(e) }} />
-                <Button text={this.props.buttonText} onClick={() => { this.props.SignIn }} />
+                <input className={'formInput'} placeholder={'User Name'} onChange={(e) => { this.props.storeUserName(e) }} />
+                <input className={'formInput'} placeholder={'Password'} onChange={(e) => { this.props.storePassword(e) }} />
+                <Button text={this.props.buttonText} onClick={() => { this.props.action }} />
             </div>
         );
     }
