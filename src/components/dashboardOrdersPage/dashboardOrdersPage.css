@@ -1,1 +1,22 @@
 
+.ordersTableHeader{
+    text-align: left;
+}
+
+
+.ordersTableHeader>div{
+    display: inline-block;
+    padding-left: 10px ;
+    border-right: 1px solid lightgray;
+
+}
+.orderIdColumn{
+    width: calc(10% - 11px);
+}
+
+.orderDetails{
+    width: calc(70% - 11px);
+}
+.orderStatus{
+    width: calc(20% - 11px);
+}

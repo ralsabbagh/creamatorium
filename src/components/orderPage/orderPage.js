@@ -12,6 +12,7 @@ class orderPage extends Component {
         return categories.map((category, index) => {
             return (
                 <OrderCategory
+                    key={index}
                     title={category.title}
                     categoryOptions={category.options}
                 />
