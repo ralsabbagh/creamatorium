@@ -12,11 +12,22 @@ class SuccessPage extends Component {
     }
 
     render() {
-        return (<div className="SuccessPage">
-            <h1>{'Thank you for your order!'}</h1>
-            <div style={{ height: '50px' }} />
-            {'#' + this.props.orderNumber}
-        </div>
+        return (
+            <div>
+                <div className="SuccessPage borderedContainer">
+                    <h1>{'Thank you for your order!'}</h1>
+                    <div style={{ height: '10px' }} />
+                    <h3>{'Your order number is'}</h3>
+                    <h1>{'#' + (this.props.store.totalOrdersCount - 1)}</h1>
+                </div>
+                <div style={{ height: '15px' }} />
+                <Link to={'/user/' + this.props.match.params.userId}>
+                    <Button
+                        text={'Track your order'}
+                        onClick={() => { }}
+                    />
+                </Link>
+            </div>
 
         );
     }
