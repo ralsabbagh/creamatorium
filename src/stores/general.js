@@ -13,7 +13,8 @@ class GeneralStore {
       storageBucket: "bucket.appspot.com"
     };
     firebase.initializeApp(config);
-    this.totalOrdersCount = 0;
+
+    this.totalOrdersCount =0;
     this.ordered = [];
     this.picked = [];
     this.ready = [];
@@ -55,14 +56,14 @@ class GeneralStore {
     },
 
     ];
-
+    this.setUpFireBase();
   }
 
 
   setUpFireBase() {
 
 
-    let _this = this;
+    var _this = this;
     firebase
       .database()
       .ref("creamatorium/orders")
@@ -91,13 +92,20 @@ class GeneralStore {
             cancelled.push(object.val());
           /// fetch user orders
           if (object.val().userID == _this.userID)
+  
             ordersPerUser.push(object.val());
+
+            console.log(ordersPerUser);
+            
         });
         _this.ordered = ordered;
         _this.picked = picked;
         _this.ready = ready;
         _this.being = being;
         _this.cancelled = cancelled;
+
+
+
 
         /// fetch user orders
         _this.ordersPerUser = ordersPerUser;
@@ -111,7 +119,7 @@ class GeneralStore {
   createOrder() {
     console.log("hey");
     // let _this = this;
-    let _this = this;
+    var _this = this;
 
     console.log(this);
 

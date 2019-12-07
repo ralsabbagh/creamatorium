@@ -31,28 +31,7 @@ class DashboardOrdersPage extends Component {
         });
     }
     render() {
-        let orders = [
-            {
-                id: '1',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-            {
-                id: '2',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-            {
-                id: '3',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-            {
-                id: '4',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-        ];
+        let orders = this.props.store.ordersPerUser;
         return (<div className="DashboardOrdersPage">
             <h1>{'Orders'}</h1>
             <div style={{ marginBottom: '50px' }}></div>
