@@ -5,6 +5,14 @@ import firebase from "firebase";
 
 class GeneralStore {
   constructor() {
+    var config = {
+      apiKey: "AIzaSyAvv8HXDFBw8IWJHzGLAqpLKJyATrxxryE",
+      authDomain: "projectId.firebaseapp.com",
+      //https://lsd-hakason.firebaseio.com/
+      databaseURL: "https://lsd-hakason.firebaseio.com",
+      storageBucket: "bucket.appspot.com"
+    };
+   firebase.initializeApp(config);
     this.totalOrdersCount = 0;
     this.ordered = [];
     this.picked = [];
@@ -14,7 +22,7 @@ class GeneralStore {
     this.ordersPerUser = [];
     this.userID = "01011";
     this.userName = "Hmmmm";
-
+ 
     this.categories = [{
       title: 'Base (required)',
       options: ['Vanilla', 'Chocolate', 'Coffee', 'Mango', 'Strawberry', 'Lemon'],
@@ -53,14 +61,7 @@ class GeneralStore {
 
   setUpFireBase() {
 
-        var config = {
-          apiKey: "AIzaSyAvv8HXDFBw8IWJHzGLAqpLKJyATrxxryE",
-          authDomain: "projectId.firebaseapp.com",
-          //https://lsd-hakason.firebaseio.com/
-          databaseURL: "https://lsd-hakason.firebaseio.com",
-          storageBucket: "bucket.appspot.com"
-        };
-        firebase.initializeApp(config);
+     
         let _this = this;
         firebase
           .database()
@@ -110,6 +111,8 @@ class GeneralStore {
   createOrder() {
     console.log("hey");
     // let _this = this;
+    let _this = this;
+
     console.log(this);
     
     var orderObject = {
@@ -150,8 +153,12 @@ class GeneralStore {
       .set(status);
   }
 
-  test() {
-    console.log("sdsdasdsad");
+  toppingChanged(categoryIndex,index){
+
+    console.log(categoryIndex,index);
+    
+    this.categories[categoryIndex].optionsSelections[index] = !this.categories[categoryIndex].optionsSelections[index];
+
   }
 
 }

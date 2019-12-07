@@ -12,8 +12,9 @@ class orderPage extends Component {
         return categories.map((category, index) => {
             return (
                 <OrderCategory
-                    key={index}
-                    store = {this.props.store}
+                key={index}
+                store = {this.props.store}
+                 categoryIndex = {index}
                     title={category.title}
                     categoryOptions={category.options}
                     optionsSelections = {category.optionsSelections}
