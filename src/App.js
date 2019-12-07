@@ -22,7 +22,6 @@ function App() {
         body={
           <Router>
             <Switch>
-              {" "}
               <Route
                 path="/user/:userId"
                 render={props =>
@@ -36,6 +35,18 @@ function App() {
                       addItem={store.addItem}
                       storeItemName={store.updateItemName}
                       deleteItem={store.deleteItem}
+                    />
+                  )
+                }
+              />
+              <Route
+                path="/:listId"
+                render={props =>
+                  (
+                    <WishListPage
+                      {...props}
+                      wishListItems={store.wishListObject.items}
+                      viewMode={true}
                     />
                   )
                 }

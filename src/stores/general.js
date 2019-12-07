@@ -20,22 +20,22 @@ class GeneralStore {
       items: [
         {
           title: "Airpods",
-          location: "Mall",
+          location: "https://www.google.com/maps/search/?q=8mall",
           status: "true"
         },
         {
           title: "Flowers",
-          location: "Garden",
+          location: "https://www.google.com/maps/search/?q=avenue",
           status: "true"
         },
         {
           title: "Candies",
-          location: "street",
+          location: "https://www.google.com/maps/search/?q=mubarkia",
           status: "false"
         },
         {
           title: "Neckless",
-          location: "Heaven",
+          location: "https://www.google.com/maps/search/?q=mubarkia",
           status: "false"
         }
       ],
@@ -56,7 +56,7 @@ class GeneralStore {
     firebase
       .database()
       .ref("wishlist")
-      .on("value", function(snapshot) {
+      .on("value", function (snapshot) {
         // _this.totalOrdersCount = snapshot.numChildren();
         // _this.wishListObject.id = _this.totalOrdersCount;
         /// [filter the orders]
@@ -189,7 +189,13 @@ class GeneralStore {
       .ref("wishlist/" + uid + "/status/")
       .set(status);
   }
+
+  login() {
+    if (false) { alert('Invalid email or password'); }
+  }
+
 }
+
 
 decorate(GeneralStore, {
   userName: observable,
