@@ -17,7 +17,7 @@ class OrderCategory extends Component {
                             this.props.store.toppingChanged(this.props.categoryIndex, index);
                         }}
                         checked={this.props.store.categories[this.props.categoryIndex][index]}
-                        onClick={() => { this.props.store.toppingChanged(this.props.categoryIndex, index) }} ></input>
+                        onChange = {() => { this.props.store.toppingChanged(this.props.categoryIndex, index) }} ></input>
                     <h5 className="optionCheckTitle">{categoryOption}</h5>
                 </div>
             );

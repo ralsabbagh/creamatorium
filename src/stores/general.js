@@ -25,7 +25,7 @@ class GeneralStore {
     this.ordersPerUserReady = [];
     this.userID = "01011";
     this.userName = "Hmmmm";
-
+    this.canSubmit = false;
     this.categories = [{
       title: 'Base (required)',
       options: ['Vanilla', 'Chocolate', 'Coffee', 'Mango', 'Strawberry', 'Lemon'],
@@ -175,6 +175,15 @@ class GeneralStore {
   toppingChanged(categoryIndex, index) {
     console.log(categoryIndex, index);
     this.categories[categoryIndex].optionsSelections[index] = !this.categories[categoryIndex].optionsSelections[index];
+
+     var canSubmit = 0;
+     this.categories[0].optionsSelections.map((option) => {
+      if (option==true)  canSubmit++;
+
+     });
+
+    this.canSubmit = (canSubmit>0)?true :false; 
+  
   }
 }
 
@@ -193,6 +202,7 @@ decorate(GeneralStore, {
   userName: observable,
   categories: observable,
   optionsSelections: observable,
+  canSubmit:observable,
 })
 
 let generalStore = new GeneralStore();

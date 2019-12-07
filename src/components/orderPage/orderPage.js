@@ -41,6 +41,7 @@ class orderPage extends Component {
                     style={{ marginTop: '20px' }}
                     text={'Submit Order'}
                     onClick={() => { this.props.store.createOrder() }}
+                    enabled = {this.props.store.canSubmit}
                 />
             </Link>
             <div style={{ height: '20px' }}>
