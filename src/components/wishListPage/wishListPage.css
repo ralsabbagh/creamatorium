@@ -26,3 +26,10 @@
     cursor: pointer;
     opacity: 0.5;
 }
+
+
+.deleteItem{
+    cursor: pointer;
+    float: right;
+    padding: 5px 10px ;
+}

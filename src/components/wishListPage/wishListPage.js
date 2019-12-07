@@ -23,7 +23,8 @@ class WishListPage extends Component {
     composeWishList() {
         return this.props.wishListItems.map((wishListItem, index) => {
             return <div className={'wishListItem'} key={index}>
-                <h3>{wishListItem}</h3>
+                <div className={'deleteItem'} onClick={() => this.props.deleteItem(wishListItem.id)}>x</div>
+                <h3>{wishListItem.title}</h3>
             </div>
         })
     }
