@@ -9,13 +9,15 @@ import {
 } from "react-router-dom";
 
 class OrdersNumbersPage extends Component {
-        constructor(){
-            super();
-        }
+    constructor() {
+        super();
+    }
+
+    componentDidMount() {
+        this.props.store.updateUserID(this.props.match.params.userId);
+    }
+
     render() {
-
-        this.props.store.userID = this.props.match.params.userId;
-
 
         return (<div className="OrdersNumbersPage">
             <OrdersNumbers

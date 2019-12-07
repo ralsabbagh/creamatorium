@@ -14,7 +14,7 @@ class GeneralStore {
     };
     firebase.initializeApp(config);
 
-    this.totalOrdersCount =0;
+    this.totalOrdersCount = 0;
     this.ordered = [];
     this.picked = [];
     this.ready = [];
@@ -61,6 +61,9 @@ class GeneralStore {
     this.setUpFireBase();
   }
 
+  updateUserID(userID) {
+    this.userID = userID;
+  }
 
   setUpFireBase() {
 
@@ -96,15 +99,14 @@ class GeneralStore {
             cancelled.push(object.val());
           /// fetch user orders
           if (object.val().userID == _this.userID)
-  
+
             ordersPerUser.push(object.val());
 
-            if (object.val().status.toLowerCase() == "ready")
+          if (object.val().status.toLowerCase() == "ready")
             ordersPerUserReady.push(object.val());
           if (object.val().status.toLowerCase() == "being")
-          ordersPerUserBeing.push(object.val());      
+            ordersPerUserBeing.push(object.val());
           console.log(object.val());
-                
         });
         _this.ordered = ordered;
         _this.picked = picked;
@@ -114,7 +116,7 @@ class GeneralStore {
 
         /// fetch user orders
         _this.ordersPerUser = ordersPerUser;
-        _this.ordersPerUserBeing= ordersPerUserBeing;
+        _this.ordersPerUserBeing = ordersPerUserBeing;
         _this.ordersPerUserReady = ordersPerUserReady;
       })
       .bind(this);
@@ -131,7 +133,6 @@ class GeneralStore {
     var _this = this;
 
     console.log(this);
-
 
     var orderObject = {
       id: this.totalOrdersCount,

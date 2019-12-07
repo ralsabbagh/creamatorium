@@ -10,6 +10,10 @@ import { observer } from 'mobx-react';
 
 class orderPage extends Component {
 
+    componentDidMount() {
+        this.props.store.updateUserID(this.props.match.params.userId);
+    }
+
     composeCategories(categories) {
         return categories.map((category, index) => {
             return (
@@ -26,7 +30,6 @@ class orderPage extends Component {
     }
 
     render() {
-        console.log(this.props.store.categories);
         return (<div className="OrderPage">
             <Order title={'Creamate your own icecream'}
                 store={this.props.store}
@@ -37,7 +40,7 @@ class orderPage extends Component {
                 <Button
                     style={{ marginTop: '20px' }}
                     text={'Submit Order'}
-                    onClick={this.props.store.createOrder.bind(this.props.store)}
+                    onClick={() => { this.props.store.createOrder() }}
                 />
             </Link>
             <div style={{ height: '20px' }}>
