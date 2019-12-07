@@ -12,7 +12,7 @@ class GeneralStore {
       databaseURL: "https://lsd-hakason.firebaseio.com",
       storageBucket: "bucket.appspot.com"
     };
-   firebase.initializeApp(config);
+    firebase.initializeApp(config);
     this.totalOrdersCount = 0;
     this.ordered = [];
     this.picked = [];
@@ -22,89 +22,89 @@ class GeneralStore {
     this.ordersPerUser = [];
     this.userID = "01011";
     this.userName = "Hmmmm";
- 
+
     this.categories = [{
       title: 'Base (required)',
       options: ['Vanilla', 'Chocolate', 'Coffee', 'Mango', 'Strawberry', 'Lemon'],
       optionsSelections: [false, false, false, false, false, false]
 
-  },
-  {
+    },
+    {
       title: 'Nuts',
       options: ['Almonds', 'Pistachios', 'Walnuts', 'Cashews', 'Pecans', 'Hazelnuts'],
       optionsSelections: [false, false, false, false, false, false]
 
-  },
-  {
+    },
+    {
       title: 'Sauces',
       options: ['Chocolate', ' Salted Caramel', 'Toffee', 'Maple'],
-      optionsSelections: [false, false, false, false, ]
+      optionsSelections: [false, false, false, false,]
 
-  },
-  {
+    },
+    {
       title: 'Fruits',
       options: ['Strawberry', 'Mango', 'Raspberry', 'Banana'],
-      optionsSelections: [false, false, false, false, ]
+      optionsSelections: [false, false, false, false,]
 
-  },
-  {
+    },
+    {
       title: 'baked yumminess',
       options: ['Dount', 'Cookies'],
       optionsSelections: [false, false,]
 
-  },
+    },
 
-  ];
-    
+    ];
+
   }
 
 
   setUpFireBase() {
 
-     
-        let _this = this;
-        firebase
-          .database()
-          .ref("creamatorium/orders")
-          .on("value", function (snapshot) {
-            _this.totalOrdersCount = snapshot.numChildren();
-            /// [filter the orders]
-            var ordered = [];
-            var picked = [];
-            var ready = [];
-            var being = [];
-            var cancelled = [];
-            console.log(snapshot);
-            /// fetch user orders
-            var ordersPerUser = [];
-            snapshot.forEach(object => {
-              /// [filter the orders]
-              if (object.val().status.toLowerCase() == "ordered")
-                ordered.push(object.val());
-              if (object.val().status.toLowerCase() == "picked")
-                picked.push(object.val());
-              if (object.val().status.toLowerCase() == "ready")
-                ready.push(object.val());
-              if (object.val().status.toLowerCase() == "being")
-                being.push(object.val());
-              if (object.val().status.toLowerCase() == "cancelled")
-                cancelled.push(object.val());
-              /// fetch user orders
-              if (object.val().userID == _this.userID)
-                ordersPerUser.push(object.val());
-            });
-            _this.ordered = ordered;
-            _this.picked = picked;
-            _this.ready = ready;
-            _this.being = being;
-            _this.cancelled = cancelled;
 
-            /// fetch user orders
-            _this.ordersPerUser = ordersPerUser;
-          })
-      
-        .bind(this);
-    
+    let _this = this;
+    firebase
+      .database()
+      .ref("creamatorium/orders")
+      .on("value", function (snapshot) {
+        _this.totalOrdersCount = snapshot.numChildren();
+        /// [filter the orders]
+        var ordered = [];
+        var picked = [];
+        var ready = [];
+        var being = [];
+        var cancelled = [];
+        console.log(snapshot);
+        /// fetch user orders
+        var ordersPerUser = [];
+        snapshot.forEach(object => {
+          /// [filter the orders]
+          if (object.val().status.toLowerCase() == "ordered")
+            ordered.push(object.val());
+          if (object.val().status.toLowerCase() == "picked")
+            picked.push(object.val());
+          if (object.val().status.toLowerCase() == "ready")
+            ready.push(object.val());
+          if (object.val().status.toLowerCase() == "being")
+            being.push(object.val());
+          if (object.val().status.toLowerCase() == "cancelled")
+            cancelled.push(object.val());
+          /// fetch user orders
+          if (object.val().userID == _this.userID)
+            ordersPerUser.push(object.val());
+        });
+        _this.ordered = ordered;
+        _this.picked = picked;
+        _this.ready = ready;
+        _this.being = being;
+        _this.cancelled = cancelled;
+
+        /// fetch user orders
+        _this.ordersPerUser = ordersPerUser;
+      })
+
+      .bind(this);
+
   }
 
 
@@ -114,7 +114,7 @@ class GeneralStore {
     let _this = this;
 
     console.log(this);
-    
+
     var orderObject = {
       id: this.totalOrdersCount,
       uid: "",
@@ -140,7 +140,7 @@ class GeneralStore {
     var updates = {};
     updates["/creamatorium/orders/" + uid + "/"] = orderObject;
 
-     firebase
+    firebase
       .database()
       .ref()
       .update(updates);
@@ -153,12 +153,9 @@ class GeneralStore {
       .set(status);
   }
 
-  toppingChanged(categoryIndex,index){
-
-    console.log(categoryIndex,index);
-    
+  toppingChanged(categoryIndex, index) {
+    console.log(categoryIndex, index);
     this.categories[categoryIndex].optionsSelections[index] = !this.categories[categoryIndex].optionsSelections[index];
-
   }
 
 }
