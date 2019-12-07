@@ -102,7 +102,9 @@ class GeneralStore {
             if (object.val().status.toLowerCase() == "ready")
             ordersPerUserReady.push(object.val());
           if (object.val().status.toLowerCase() == "being")
-          ordersPerUserBeing.push(object.val());            
+          ordersPerUserBeing.push(object.val());      
+          console.log(object.val());
+                
         });
         _this.ordered = ordered;
         _this.picked = picked;
