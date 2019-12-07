@@ -13,13 +13,16 @@ class GeneralStore {
       storageBucket: "bucket.appspot.com"
     };
     firebase.initializeApp(config);
-    this.totalOrdersCount = 0;
+
+    this.totalOrdersCount =0;
     this.ordered = [];
     this.picked = [];
     this.ready = [];
     this.being = [];
     this.cancelled = [];
     this.ordersPerUser = [];
+    this.ordersPerUserBeing = [];
+    this.ordersPerUserReady = [];
     this.userID = "01011";
     this.userName = "Hmmmm";
 
@@ -55,14 +58,14 @@ class GeneralStore {
     },
 
     ];
-
+    this.setUpFireBase();
   }
 
 
   setUpFireBase() {
 
 
-    let _this = this;
+    var _this = this;
     firebase
       .database()
       .ref("creamatorium/orders")
@@ -77,6 +80,8 @@ class GeneralStore {
         console.log(snapshot);
         /// fetch user orders
         var ordersPerUser = [];
+        var ordersPerUserBeing = [];
+        var ordersPerUserReady = [];
         snapshot.forEach(object => {
           /// [filter the orders]
           if (object.val().status.toLowerCase() == "ordered")
@@ -91,15 +96,26 @@ class GeneralStore {
             cancelled.push(object.val());
           /// fetch user orders
           if (object.val().userID == _this.userID)
+  
             ordersPerUser.push(object.val());
+
+            if (object.val().status.toLowerCase() == "ready")
+            ordersPerUserReady.push(object.val());
+          if (object.val().status.toLowerCase() == "being")
+          ordersPerUserBeing.push(object.val());      
+          console.log(object.val());
+                
         });
         _this.ordered = ordered;
         _this.picked = picked;
         _this.ready = ready;
         _this.being = being;
         _this.cancelled = cancelled;
+
         /// fetch user orders
         _this.ordersPerUser = ordersPerUser;
+        _this.ordersPerUserBeing= ordersPerUserBeing;
+        _this.ordersPerUserReady = ordersPerUserReady;
       })
       .bind(this);
 
@@ -109,9 +125,13 @@ class GeneralStore {
   createOrder() {
     console.log("heyyy");
     // let _this = this;
-    let _this = this;
+
     console.log(this.categories[0].optionsSelections[0]);
     console.log(this.categories[0].optionsSelections[1]);
+    var _this = this;
+
+    console.log(this);
+
 
     var orderObject = {
       id: this.totalOrdersCount,
@@ -166,6 +186,8 @@ decorate(GeneralStore, {
   being: observable,
   cancelled: observable,
   ordersPerUser: observable,
+  ordersPerUserBeing: observable,
+  ordersPerUserReady: observable,
   userID: observable,
   userName: observable,
   categories: observable,

@@ -5,7 +5,7 @@ class OrdersNumbers extends Component {
     composeList(list) {
         return list.map((listItem, index) => {
             return (
-                <h5 key={index}>{'#' + listItem.orderID}</h5>
+                <h5 key={index}>{'#' + listItem.id}</h5>
             );
         });
     }

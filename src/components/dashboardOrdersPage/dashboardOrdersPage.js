@@ -27,32 +27,12 @@ class DashboardOrdersPage extends Component {
 
     composeOrdersRows(orders) {
         return orders.map((order, index) => {
-            return this.composeTableRow(order.id, order.specification, order.status, true, index, 'gray')
+            
+            return this.composeTableRow(order.id, order.specification[0], order.status, true, index, 'gray')
         });
     }
     render() {
-        let orders = [
-            {
-                id: '1',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-            {
-                id: '2',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-            {
-                id: '3',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-            {
-                id: '4',
-                specification: 'Base: Vanilla, Nuts: Cashews, Pistachios',
-                'status': 'picked'
-            },
-        ];
+        let orders = this.props.store.ordersPerUser;
         return (<div className="DashboardOrdersPage">
             <h1>{'Orders'}</h1>
             <div style={{ marginBottom: '50px' }}></div>
