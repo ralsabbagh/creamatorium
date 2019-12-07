@@ -15,29 +15,30 @@ class GeneralStore {
     this.setUpFireBase();
     this.userName = "";
     this.currentItemName = "";
-    this.currentUid = "";
+    this.currentUid = null;
     this.wishListObject = {
       items: [
-        {
-          title: "Airpods",
-          location: "https://www.google.com/maps/search/?q=8mall",
-          status: "true"
-        },
-        {
-          title: "Flowers",
-          location: "https://www.google.com/maps/search/?q=avenue",
-          status: "true"
-        },
-        {
-          title: "Candies",
-          location: "https://www.google.com/maps/search/?q=mubarkia",
-          status: "false"
-        },
-        {
-          title: "Neckless",
-          location: "https://www.google.com/maps/search/?q=mubarkia",
-          status: "false"
-        }
+        //   {
+        //     title: "Airpods",
+        //     location: "https://www.google.com/maps/search/?q=8mall",
+        //     status: "true"
+        //   },
+        //   {
+        //     title: "Flowers",
+        //     location: "https://www.google.com/maps/search/?q=avenue",
+        //     status: "true"
+        //   },
+        //   {
+        //     title: "Candies",
+        //     location: "https://www.google.com/maps/search/?q=mubarkia",
+        //     status: "false"
+        //   },
+        //   {
+        //     title: "Neckless",
+        //     location: "https://www.google.com/maps/search/?q=mubarkia",
+        //     status: "false"
+        //   }
+
       ],
       uid: ""
     };
@@ -57,53 +58,6 @@ class GeneralStore {
       .database()
       .ref("wishlist")
       .on("value", function (snapshot) {
-        // _this.totalOrdersCount = snapshot.numChildren();
-        // _this.wishListObject.id = _this.totalOrdersCount;
-        /// [filter the orders]
-        // var ordered = [];
-        // var picked = [];
-        // var ready = [];
-        // var being = [];
-        // var cancelled = [];
-        // console.log(snapshot);
-        // /// fetch user orders
-        // var ordersPerUser = [];
-        // var ordersPerUserBeing = [];
-        // var ordersPerUserReady = [];
-        // var allOrders = [];
-        // snapshot.forEach(object => {
-        //   allOrders.push(object.val());
-        //   /// [filter the orders]
-        //   if (object.val().status.toLowerCase() == "ordered")
-        //     ordered.push(object.val());
-        //   if (object.val().status.toLowerCase() == "picked")
-        //     picked.push(object.val());
-        //   if (object.val().status.toLowerCase() == "ready")
-        //     ready.push(object.val());
-        //   if (object.val().status.toLowerCase() == "being")
-        //     being.push(object.val());
-        //   if (object.val().status.toLowerCase() == "cancelled")
-        //     cancelled.push(object.val());
-        //   /// fetch user orders
-        //   if (object.val().userID == _this.getUserID()) {
-        //     ordersPerUser.push(object.val());
-        //     console.log("heeeeelooooo");
-        //     if (object.val().status.toLowerCase() == "ready")
-        //       ordersPerUserReady.push(object.val());
-        //     if (object.val().status.toLowerCase() == "being")
-        //       ordersPerUserBeing.push(object.val());
-        //   }
-        // });
-        // _this.ordered = ordered;
-        // _this.picked = picked;
-        // _this.ready = ready;
-        // _this.being = being;
-        // _this.cancelled = cancelled;
-        // /// fetch user orders
-        // _this.ordersPerUser = ordersPerUser;
-        // _this.ordersPerUserBeing = ordersPerUserBeing;
-        // _this.ordersPerUserReady = ordersPerUserReady;
-        // _this.allOrders = allOrders;
       })
       .bind(this);
   }
@@ -112,11 +66,10 @@ class GeneralStore {
     var _this = this;
 
     let locations = [
-      "Mall",
-      "Sea Side",
-      "Derwaza",
-      "Souq Al-Mubarakia",
-      "Fashion Mill"
+      "https://www.google.com/maps/search/?q=8mall",
+      "https://www.google.com/maps/search/?q=avenue",
+      "https://www.google.com/maps/search/?q=mubarkia",
+      "https://www.google.com/maps/search/?q=mubarkia",
     ];
     var rand = locations[Math.floor(Math.random() * locations.length)];
 
@@ -161,6 +114,7 @@ class GeneralStore {
     _this.currentEmail = e;
   }
   registerUser() {
+    console.log('fsdfds')
     var _this = this;
 
     var uid = firebase
@@ -199,7 +153,8 @@ class GeneralStore {
 
 decorate(GeneralStore, {
   userName: observable,
-  wishListObject: observable
+  wishListObject: observable,
+  currentUid: observable,
 });
 
 let generalStore = new GeneralStore();

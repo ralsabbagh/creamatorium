@@ -49,6 +49,7 @@ class WishListPage extends Component {
                         <h1>+</h1>
                     </div>}
                 </div>
+
                 <Popup show={this.state.showPopup}>
                     <input
                         className={"formInput"}
@@ -65,6 +66,7 @@ class WishListPage extends Component {
                         }}
                     />
                 </Popup>
+
             </React.Fragment>
         );
     }

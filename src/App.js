@@ -10,7 +10,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
+  Link
 } from "react-router-dom";
 import "./App.css";
 import PopUp from "./components/popUp/popUp.js";
@@ -25,19 +26,42 @@ function App() {
               <Route
                 path="/user/:userId"
                 render={props =>
-                  // this.store.userObj == null
-                  true ? (
-                    <Redirect to="/" />
-                  ) : (
-                    <WishListPage
-                      {...props}
-                      wishListItems={store.wishListObject.items}
-                      addItem={store.addItem}
-                      storeItemName={store.updateItemName}
-                      deleteItem={store.deleteItem}
-                    />
-                  )
+                  store.currentUid == null
+                    ? (
+                      <Redirect to="/" />
+                    ) : (
+                      <div>
+                        <WishListPage
+                          {...props}
+                          wishListItems={store.wishListObject.items}
+                          addItem={store.addItem}
+                          storeItemName={store.updateItemName}
+                          deleteItem={store.deleteItem}
+                          sharableList={store.currentUid}
+                        />
+                        <div><Link to={'/' + store.currentUid}>Share this list</Link></div>
+                      </div>
+                    )
                 }
+              />
+              {console.log(store.currentUid)}
+              <Route
+                exact path="/signup"
+                render={props => (
+
+                  store.currentUid == null ?
+                    <PopUp show={true}>
+                      <SignForm
+                        storeUserName={store.updateUser}
+                        storePassword={store.updatePassword}
+                        storeEmail={store.updateEmail}
+                        action={store.registerUser}
+                        buttonText="Sign Up"
+                      />
+                    </PopUp>
+                    : <Redirect to=
+                      {'/user/' + store.currentUid} />
+                )}
               />
               <Route
                 path="/:listId"
@@ -51,28 +75,15 @@ function App() {
                   )
                 }
               />
-              <Route
-                path="/signup"
-                render={props => (
-                  <PopUp show={true}>
-                    <SignForm
-                      storeUserName={store.updateUser}
-                      storePassword={store.updatePassword}
-                      storeEmail={store.updateEmail}
-                      action={store.registerUser}
-                      buttonText="Sign Up"
-                    />
-                  </PopUp>
-                )}
-              />
+
               <Route
                 path="/"
                 render={props => (
                   <PopUp show={true}>
                     <SignForm
-                      storeUserName={e => {}}
-                      storePassword={e => {}}
-                      action={() => {}}
+                      storeUserName={store.updateUser}
+                      storePassword={store.updatePassword}
+                      action={() => { }}
                       buttonText="Sign In"
                       link={"/signup"}
                       linkTitle={"dont have an account?"}
