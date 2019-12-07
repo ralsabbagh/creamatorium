@@ -27,7 +27,8 @@ class DashboardOrdersPage extends Component {
 
     composeOrdersRows(orders) {
         return orders.map((order, index) => {
-            return this.composeTableRow(order.id, order.specification, order.status, true, index, 'gray')
+            
+            return this.composeTableRow(order.id, order.specification[0], order.status, true, index, 'gray')
         });
     }
     render() {

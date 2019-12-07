@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './ordersNumbersPage.css';
 import OrdersNumbers from '../ordersNumbers/ordersNumbers.js';
 import Button from '../button/button.js';
+import { observer } from 'mobx-react';
+
 import {
     Link,
 } from "react-router-dom";
@@ -18,9 +20,9 @@ class OrdersNumbersPage extends Component {
         return (<div className="OrdersNumbersPage">
             <OrdersNumbers
                 readyListTitle='ready for pickup'
-                readyList={this.props.store.ready}
+                readyList={this.props.store.ordersPerUserReady}
                 preaparingListTitle='being prepared'
-                preaparingList={this.props.store.being}
+                preaparingList={this.props.store.ordersPerUserBeing}
             ></OrdersNumbers>
             <Link to={'/user/' + this.props.match.params.userId + '/order/'}>
                 <Button
@@ -34,4 +36,4 @@ class OrdersNumbersPage extends Component {
     }
 }
 
-export default OrdersNumbersPage;
+export default observer(OrdersNumbersPage);

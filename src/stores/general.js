@@ -21,6 +21,8 @@ class GeneralStore {
     this.being = [];
     this.cancelled = [];
     this.ordersPerUser = [];
+    this.ordersPerUserBeing = [];
+    this.ordersPerUserReady = [];
     this.userID = "01011";
     this.userName = "Hmmmm";
 
@@ -78,6 +80,8 @@ class GeneralStore {
         console.log(snapshot);
         /// fetch user orders
         var ordersPerUser = [];
+        var ordersPerUserBeing = [];
+        var ordersPerUserReady = [];
         snapshot.forEach(object => {
           /// [filter the orders]
           if (object.val().status.toLowerCase() == "ordered")
@@ -95,8 +99,10 @@ class GeneralStore {
   
             ordersPerUser.push(object.val());
 
-            console.log(ordersPerUser);
-            
+            if (object.val().status.toLowerCase() == "ready")
+            ordersPerUserReady.push(object.val());
+          if (object.val().status.toLowerCase() == "being")
+          ordersPerUserBeing.push(object.val());            
         });
         _this.ordered = ordered;
         _this.picked = picked;
@@ -109,6 +115,8 @@ class GeneralStore {
 
         /// fetch user orders
         _this.ordersPerUser = ordersPerUser;
+        _this.ordersPerUserBeing= ordersPerUserBeing;
+        _this.ordersPerUserReady = ordersPerUserReady;
       })
 
       .bind(this);
@@ -177,6 +185,8 @@ decorate(GeneralStore, {
   being: observable,
   cancelled: observable,
   ordersPerUser: observable,
+  ordersPerUserBeing: observable,
+  ordersPerUserReady: observable,
   userID: observable,
   userName: observable,
 })
