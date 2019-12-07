@@ -18,18 +18,23 @@ class GeneralStore {
     this.wishListObject = {
       items: [
         {
-          title: "iPhone",
+          title: "Airpods",
           location: "Mall",
           status: "true"
         },
         {
-          title: "iPhone2",
-          location: "Mall2",
+          title: "Flowers",
+          location: "Garden",
           status: "true"
         },
         {
-          title: "iPhone3",
-          location: "Mall3",
+          title: "Candies",
+          location: "street",
+          status: "false"
+        },
+        {
+          title: "Neckless",
+          location: "Heaven",
           status: "false"
         }
       ],
