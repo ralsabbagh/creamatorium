@@ -21,6 +21,7 @@ class GeneralStore {
     this.ordersPerUser = [];
     this.ordersPerUserBeing = [];
     this.ordersPerUserReady = [];
+    this.allOrders = [];
     this.userID = "01011";
     this.userName = "Hmmmm";
     this.canSubmit = false;
@@ -85,6 +86,7 @@ class GeneralStore {
 
   updateUserID(userID) {
     this.userID = userID;
+    this.orderObject.userID = userID;
   }
 
   setUpFireBase() {
@@ -94,6 +96,7 @@ class GeneralStore {
       .ref("creamatorium/orders")
       .on("value", function (snapshot) {
         _this.totalOrdersCount = snapshot.numChildren();
+        _this.orderObject.id = _this.totalOrdersCount;
         /// [filter the orders]
         var ordered = [];
         var picked = [];
@@ -105,7 +108,10 @@ class GeneralStore {
         var ordersPerUser = [];
         var ordersPerUserBeing = [];
         var ordersPerUserReady = [];
+        var allOrders = [];
         snapshot.forEach(object => {
+          allOrders.push(object.val());
+
           /// [filter the orders]
           if (object.val().status.toLowerCase() == "ordered")
             ordered.push(object.val());
@@ -137,6 +143,7 @@ class GeneralStore {
         _this.ordersPerUser = ordersPerUser;
         _this.ordersPerUserBeing = ordersPerUserBeing;
         _this.ordersPerUserReady = ordersPerUserReady;
+        _this.allOrders = allOrders;
       })
       .bind(this);
   }
@@ -249,7 +256,8 @@ decorate(GeneralStore, {
   userName: observable,
   categories: observable,
   optionsSelections: observable,
-  canSubmit: observable
+  canSubmit: observable,
+  allOrders: observable
 });
 
 let generalStore = new GeneralStore();
