@@ -25,6 +25,26 @@ class GeneralStore {
     this.userID = "01011";
     this.userName = "Hmmmm";
     this.canSubmit = false;
+    this.categories = [];
+    this.setUpFireBase();
+
+    this.orderObject = {
+      id: this.totalOrdersCount,
+      uid: "",
+      specification: {
+        base: [""],
+        nuts: [""],
+        sauces: [""],
+        fruits: [""],
+        baked: [""]
+      },
+      status: "Ordered",
+      userID: this.userID,
+      userName: this.userName
+    };
+  }
+
+  setCategories() {
     this.categories = [
       {
         title: "Base (required)",
@@ -66,22 +86,6 @@ class GeneralStore {
         optionsSelections: [false, false]
       }
     ];
-    this.setUpFireBase();
-
-    this.orderObject = {
-      id: this.totalOrdersCount,
-      uid: "",
-      specification: {
-        base: [""],
-        nuts: [""],
-        sauces: [""],
-        fruits: [""],
-        baked: [""]
-      },
-      status: "Ordered",
-      userID: this.userID,
-      userName: this.userName
-    };
   }
 
   updateUserID(userID) {
@@ -171,6 +175,8 @@ class GeneralStore {
       .database()
       .ref()
       .update(updates);
+    this.setCategories();
+    this.canSubmit = false;
   }
 
   updateOrderStatus(uid, status) {
@@ -262,5 +268,5 @@ decorate(GeneralStore, {
 
 let generalStore = new GeneralStore();
 generalStore.setUpFireBase();
-
+generalStore.setCategories();
 export default generalStore;
