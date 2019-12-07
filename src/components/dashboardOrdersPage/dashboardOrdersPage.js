@@ -100,7 +100,6 @@ class DashboardOrdersPage extends Component {
     });
   }
   render() {
-    let orders = this.props.store.being;
     return (
       <div className="DashboardOrdersPage">
         <h1>{"Orders"}</h1>

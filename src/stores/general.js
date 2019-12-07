@@ -92,6 +92,9 @@ class GeneralStore {
     this.userID = userID;
     this.orderObject.userID = userID;
   }
+  getUserID() {
+    return this.userID;
+  }
 
   setUpFireBase() {
     var _this = this;
@@ -128,14 +131,15 @@ class GeneralStore {
           if (object.val().status.toLowerCase() == "cancelled")
             cancelled.push(object.val());
           /// fetch user orders
-          if (object.val().userID == _this.userID)
+          if (object.val().userID == _this.getUserID()) {
             ordersPerUser.push(object.val());
+            console.log("heeeeelooooo");
 
-          if (object.val().status.toLowerCase() == "ready")
-            ordersPerUserReady.push(object.val());
-          if (object.val().status.toLowerCase() == "being")
-            ordersPerUserBeing.push(object.val());
-          console.log(object.val());
+            if (object.val().status.toLowerCase() == "ready")
+              ordersPerUserReady.push(object.val());
+            if (object.val().status.toLowerCase() == "being")
+              ordersPerUserBeing.push(object.val());
+          }
         });
         _this.ordered = ordered;
         _this.picked = picked;
