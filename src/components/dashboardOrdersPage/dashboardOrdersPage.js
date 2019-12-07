@@ -53,7 +53,7 @@ class DashboardOrdersPage extends Component {
         <div style={{ marginBottom: "50px" }}></div>
         <div className="borderedContainer" style={{ padding: "15px" }}>
           {this.composeTableRow("#", "order", "status", false)}
-          {this.composeOrdersRows(orders)}
+          {this.composeOrdersRows(this.props.store.allOrders)}
         </div>
       </div>
     );
