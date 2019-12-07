@@ -6,36 +6,38 @@ import Button from '../button/button.js';
 import {
     Link,
 } from "react-router-dom";
+import { observer } from 'mobx-react';
+
 class orderPage extends Component {
 
     composeCategories(categories) {
         return categories.map((category, index) => {
             return (
                 <OrderCategory
-                key={index}
-                store = {this.props.store}
-                 categoryIndex = {index}
+                    key={index}
+                    store={this.props.store}
+                    categoryIndex={index}
                     title={category.title}
                     categoryOptions={category.options}
-                    optionsSelections = {category.optionsSelections}
+                    optionsSelections={category.optionsSelections}
                 />
             );
         });
     }
 
     render() {
-       
+        console.log(this.props.store.categories);
         return (<div className="OrderPage">
             <Order title={'Creamate your own icecream'}
-                            store = {this.props.store}
-                            >
+                store={this.props.store}
+            >
                 {this.composeCategories(this.props.store.categories)}
             </Order>
             <Link to={'/user/' + this.props.match.params.userId + '/success/'}>
                 <Button
                     style={{ marginTop: '20px' }}
                     text={'Submit Order'}
-                    onClick = {this.props.store.createOrder.bind(this.props.store)}
+                    onClick={this.props.store.createOrder.bind(this.props.store)}
                 />
             </Link>
             <div style={{ height: '20px' }}>
@@ -44,4 +46,4 @@ class orderPage extends Component {
     }
 }
 
-export default orderPage;
+export default observer(orderPage);

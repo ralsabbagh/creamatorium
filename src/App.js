@@ -17,7 +17,7 @@ import {
 import './App.css';
 
 function App() {
-  console.log(store);
+  // console.log(store);
   return (
     <div className="App">
       <Page

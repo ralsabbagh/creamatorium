@@ -98,22 +98,20 @@ class GeneralStore {
         _this.ready = ready;
         _this.being = being;
         _this.cancelled = cancelled;
-
         /// fetch user orders
         _this.ordersPerUser = ordersPerUser;
       })
-
       .bind(this);
 
   }
 
 
   createOrder() {
-    console.log("hey");
+    console.log("heyyy");
     // let _this = this;
     let _this = this;
-
-    console.log(this);
+    console.log(this.categories[0].optionsSelections[0]);
+    console.log(this.categories[0].optionsSelections[1]);
 
     var orderObject = {
       id: this.totalOrdersCount,
@@ -123,7 +121,7 @@ class GeneralStore {
         nuts: [""],
         sauces: [""],
         fruits: [""],
-        baked: [""]
+        baked: [""],
       },
       status: "Ordered",
       userID: this.userID,
@@ -157,7 +155,6 @@ class GeneralStore {
     console.log(categoryIndex, index);
     this.categories[categoryIndex].optionsSelections[index] = !this.categories[categoryIndex].optionsSelections[index];
   }
-
 }
 
 decorate(GeneralStore, {
@@ -171,8 +168,11 @@ decorate(GeneralStore, {
   ordersPerUser: observable,
   userID: observable,
   userName: observable,
+  categories: observable,
+  optionsSelections: observable,
 })
 
 let generalStore = new GeneralStore();
-// generalStore.setUpFireBase();
+generalStore.setUpFireBase();
+
 export default generalStore;

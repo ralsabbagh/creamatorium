@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './orderCategory.css';
-
+import { observer } from 'mobx-react';
 
 class OrderCategory extends Component {
     constructor() {
@@ -13,7 +13,10 @@ class OrderCategory extends Component {
                     <input className="optionCheckBox"
                         type="checkbox" name={categoryOption}
                         value={categoryOption}
-                        checked={this.props.optionsSelections[index]}
+                        onChange={() => {
+                            this.props.store.toppingChanged(this.props.categoryIndex, index);
+                        }}
+                        checked={this.props.store.categories[this.props.categoryIndex][index]}
                         onClick={() => { this.props.store.toppingChanged(this.props.categoryIndex, index) }} ></input>
                     <h5 className="optionCheckTitle">{categoryOption}</h5>
                 </div>
@@ -21,9 +24,6 @@ class OrderCategory extends Component {
         })
     }
 
-    // updateMe() {
-    //     this.props.store.toppingChanged(this.props.categoryIndex, 1);
-    // }
     render() {
         return (<div className="OrderCategory">
             <h3>{this.props.title}</h3>
@@ -32,4 +32,4 @@ class OrderCategory extends Component {
     }
 }
 
-export default OrderCategory;
+export default observer(OrderCategory);
