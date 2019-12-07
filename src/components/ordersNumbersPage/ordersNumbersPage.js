@@ -7,13 +7,20 @@ import {
 } from "react-router-dom";
 
 class OrdersNumbersPage extends Component {
+        constructor(){
+            super();
+        }
     render() {
+
+        this.props.store.userID = this.props.match.params.userId;
+
+
         return (<div className="OrdersNumbersPage">
             <OrdersNumbers
                 readyListTitle='ready for pickup'
-                readyList={['1', '2', '3']}
+                readyList={this.props.store.ready}
                 preaparingListTitle='being prepared'
-                preaparingList={['1', '2']}
+                preaparingList={this.props.store.being}
             ></OrdersNumbers>
             <Link to={'/user/' + this.props.match.params.userId + '/order/'}>
                 <Button
