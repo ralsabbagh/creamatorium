@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './wishListPage.css';
+import './signForm.css';
 import Button from '../button/button.js';
 
 import {
@@ -10,8 +10,16 @@ class SignForm extends Component {
         return (
             <div className="SignForm">
                 <input className={'formInput'} placeholder={'User Name'} onChange={(e) => { this.props.storeUserName(e) }} />
-                <input className={'formInput'} placeholder={'Password'} onChange={(e) => { this.props.storePassword(e) }} />
-                <Button text={this.props.buttonText} onClick={() => { this.props.action }} />
+                <input className={'formInput'} placeholder={'Password'} onChange={(e) => { this.props.storePassword(e) }} type={'password'} />
+                <Button text={this.props.buttonText} onClick={() => { this.props.action() }} />
+                {this.props.link ?
+                    <div style={{ marginTop: '15px' }}>
+                        <Link to={this.props.link}>
+                            {this.props.linkTitle}
+                        </Link>
+                    </div>
+                    : null
+                }
             </div>
         );
     }
