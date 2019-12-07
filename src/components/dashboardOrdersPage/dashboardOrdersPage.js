@@ -12,7 +12,8 @@ class DashboardOrdersPage extends Component {
     orderStatus,
     button,
     key,
-    color
+    color,
+    uid
   ) {
     return (
       <div className="ordersTableHeader" key={key}>
@@ -24,7 +25,12 @@ class DashboardOrdersPage extends Component {
         </div>
         <div className="orderStatus" style={{ color: color }}>
           {button ? (
-            <Button text={orderStatus}></Button>
+            <Button
+              text={orderStatus}
+              onClick={() => {
+                this.props.store.orderButtonPressed(uid, orderStatus);
+              }}
+            ></Button>
           ) : (
             <h3>{orderStatus}</h3>
           )}
@@ -41,19 +47,19 @@ class DashboardOrdersPage extends Component {
 
       if (order.specification.nuts != null)
         specification =
-          specification + " Nuts: " + order.specification.nuts.join(", ");
+          specification + ", Nuts: " + order.specification.nuts.join(", ");
 
       if (order.specification.sauces != null)
         specification =
-          specification + " Sauces: " + order.specification.sauces.join(", ");
+          specification + ", Sauces: " + order.specification.sauces.join(", ");
 
       if (order.specification.fruits != null)
         specification =
-          specification + " Fruits: " + order.specification.fruits.join(", ");
+          specification + ", Fruits: " + order.specification.fruits.join(", ");
 
       if (order.specification.baked != null)
         specification =
-          specification + " Baked: " + order.specification.baked.join(", ");
+          specification + ", Baked: " + order.specification.baked.join(", ");
 
       return this.composeTableRow(
         order.id,
@@ -61,7 +67,8 @@ class DashboardOrdersPage extends Component {
         order.status,
         true,
         index,
-        "gray"
+        "gray",
+        order.uid
       );
     });
   }

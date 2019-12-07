@@ -98,7 +98,7 @@ class GeneralStore {
     firebase
       .database()
       .ref("creamatorium/orders")
-      .on("value", function (snapshot) {
+      .on("value", function(snapshot) {
         _this.totalOrdersCount = snapshot.numChildren();
         _this.orderObject.id = _this.totalOrdersCount;
         /// [filter the orders]
@@ -180,10 +180,32 @@ class GeneralStore {
   }
 
   updateOrderStatus(uid, status) {
+    console.log(uid, status);
+
     firebase
       .database()
       .ref("creamatorium/orders/" + uid + "/status/")
       .set(status);
+  }
+
+  orderButtonPressed(uid, currentStatus) {
+    switch (currentStatus.toLowerCase()) {
+      case "ordered":
+        this.updateOrderStatus(uid, "being");
+        break;
+      case "picked":
+        break;
+      case "ready":
+        break;
+      case "being":
+        this.updateOrderStatus(uid, "ready");
+        break;
+      case "cancelled":
+        break;
+
+      default:
+        break;
+    }
   }
 
   toppingChanged(categoryIndex, index) {
