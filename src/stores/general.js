@@ -60,7 +60,7 @@ class GeneralStore {
         optionsSelections: [false, false, false, false]
       },
       {
-        title: "baked yumminess",
+        title: "Baked yumminess",
         options: ["Dount", "Cookies"],
         optionsSelections: [false, false]
       }
@@ -92,7 +92,7 @@ class GeneralStore {
     firebase
       .database()
       .ref("creamatorium/orders")
-      .on("value", function(snapshot) {
+      .on("value", function (snapshot) {
         _this.totalOrdersCount = snapshot.numChildren();
         /// [filter the orders]
         var ordered = [];
