@@ -35,9 +35,29 @@ class DashboardOrdersPage extends Component {
 
   composeOrdersRows(orders) {
     return orders.map((order, index) => {
+      var specification = "";
+      if (order.specification.base != null)
+        specification = " Base: " + order.specification.base.join(", ");
+
+      if (order.specification.nuts != null)
+        specification =
+          specification + " Nuts: " + order.specification.nuts.join(", ");
+
+      if (order.specification.sauces != null)
+        specification =
+          specification + " Sauces: " + order.specification.sauces.join(", ");
+
+      if (order.specification.fruits != null)
+        specification =
+          specification + " Fruits: " + order.specification.fruits.join(", ");
+
+      if (order.specification.baked != null)
+        specification =
+          specification + " Baked: " + order.specification.baked.join(", ");
+
       return this.composeTableRow(
         order.id,
-        order.specification[0],
+        specification,
         order.status,
         true,
         index,
