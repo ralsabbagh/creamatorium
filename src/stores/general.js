@@ -14,7 +14,7 @@ class GeneralStore {
 
     this.setUpFireBase();
     this.userName = "";
-
+    this.currentItemName = "";
     this.wishListObject = {
       items: [
         {
@@ -40,6 +40,10 @@ class GeneralStore {
       ],
       uid: ""
     };
+
+    this.deleteItem = this.deleteItem.bind(this);
+    this.addItem = this.addItem.bind(this);
+    this.updateItemName = this.updateItemName.bind(this);
   }
 
   setUpFireBase() {
@@ -99,25 +103,38 @@ class GeneralStore {
       .bind(this);
   }
 
-  removeItem() {}
-  addItem(item) {
+  addItem() {
     var _this = this;
-    _this.wishListObject.items.push(item);
-    // var uid = firebase
-    //   .database()
-    //   .ref("wishlist")
-    //   .push().key;
 
-    // this.wishListObject.uid = uid;
-    // var updates = {};
-    // updates["/wishlist/" + uid + "/"] = this.wishListObject;
+    let locations = [
+      "Mall",
+      "Sea Side",
+      "Derwaza",
+      "Souq Al-Mubarakia",
+      "Fashion Mill"
+    ];
+    var rand = locations[Math.floor(Math.random() * locations.length)];
 
-    // firebase
-    //   .database()
-    //   .ref()
-    //   .update(updates);
-    // this.setCategories();
-    // this.canSubmit = false;
+    var _item = {
+      title: _this.currentItemName,
+      location: rand,
+      status: "false"
+    };
+    _this.currentItemName = "";
+    _this.wishListObject.items.push(_item);
+  }
+  deleteItem(item) {
+    var _this = this;
+    _this.wishListObject.items.remove(item);
+    console.log(_this.wishListObject.items);
+  }
+  updateItemName(e) {
+    var _this = this;
+    console.log(e);
+
+    _this.currentItemName = e;
+    console.log("_this.currentItemName");
+    console.log(_this.currentItemName);
   }
 
   updateListStatus(uid, status) {
