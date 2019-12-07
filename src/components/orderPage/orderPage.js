@@ -15,6 +15,7 @@ class orderPage extends Component {
     }
 
     composeCategories(categories) {
+
         return categories.map((category, index) => {
             return (
                 <OrderCategory
@@ -36,14 +37,21 @@ class orderPage extends Component {
             >
                 {this.composeCategories(this.props.store.categories)}
             </Order>
-            <Link to={'/user/' + this.props.match.params.userId + '/success/'}>
+            {this.props.store.canSubmit ?
+                <Link to={'/user/' + this.props.match.params.userId + '/success/'}>
+                    <Button
+                        style={{ marginTop: '20px' }}
+                        text={'Submit Order'}
+                        onClick={() => { this.props.store.createOrder() }}
+
+                    />
+                </Link> :
                 <Button
                     style={{ marginTop: '20px' }}
                     text={'Submit Order'}
-                    onClick={() => { this.props.store.createOrder() }}
-                    enabled = {this.props.store.canSubmit}
-                />
-            </Link>
+                    onClick={() => { alert('Choose your icecream base please') }}
+                />}
+
             <div style={{ height: '20px' }}>
             </div>
         </div>);
