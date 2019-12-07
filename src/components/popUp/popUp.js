@@ -10,7 +10,7 @@ class PopUp extends Component {
         return (
             <React.Fragment>
                 <div className={this.props.show ? "PopUp" : "PopUpClosed"}>
-                    <div className="PopUpBody container">
+                    <div className="PopUpBody">
                         {this.props.children}
                     </div>
                 </div>
