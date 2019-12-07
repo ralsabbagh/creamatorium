@@ -15,7 +15,7 @@ class OrdersNumbersPage extends Component {
                 preaparingListTitle='being prepared'
                 preaparingList={['1', '2']}
             ></OrdersNumbers>
-            <Link to={'/user/order/'}>
+            <Link to={'/user/' + this.props.match.params.userId + '/order/'}>
                 <Button
                     style={{ marginTop: '20px' }}
                     text={'Place a New Order'}

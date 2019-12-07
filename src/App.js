@@ -26,17 +26,17 @@ function App() {
         body={
           <Router>
             <Switch>
-              <Route exact path='/user/'
-                render={props => <OrdersNumbersPage />}
+              <Route path='/user/:userId/order/'
+                render={props => <OrderPage {...props} />}
               />
-              <Route exact path='/user/order/'
-                render={props => <OrderPage />}
+              <Route path='/user/:userId/success/'
+                render={props => <SuccessPage {...props} />}
               />
-              <Route exact path='/user/success/'
-                render={props => <SuccessPage />}
+              <Route path='/user/:userId'
+                render={props => <OrdersNumbersPage  {...props} />}
               />
-              <Route exact path='/dashboard/'
-                render={props => <DashboardOrdersPage />}
+              <Route path='/dashboard/'
+                render={props => <DashboardOrdersPage {...props} />}
               />
             </Switch>
           </Router>
