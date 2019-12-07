@@ -15,6 +15,7 @@ class GeneralStore {
     this.setUpFireBase();
     this.userName = "";
     this.currentItemName = "";
+    this.currentUid = "";
     this.wishListObject = {
       items: [
         {
@@ -172,6 +173,7 @@ class GeneralStore {
       password: _this.currentPassword,
       uid: uid
     };
+    _this.currentUid = uid;
     var updates = {};
     updates["/wishlist/users/" + uid + "/"] = usr;
 
