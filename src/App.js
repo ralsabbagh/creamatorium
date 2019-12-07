@@ -27,16 +27,16 @@ function App() {
           <Router>
             <Switch>
               <Route path='/user/:userId/order/'
-                render={props => <OrderPage {...props} />}
+                render={props => <OrderPage {...props}  store = {store} />}
               />
               <Route path='/user/:userId/success/'
-                render={props => <SuccessPage {...props} />}
+                render={props => <SuccessPage {...props}  store = {store} />}
               />
               <Route path='/user/:userId'
-                render={props => <OrdersNumbersPage  {...props} />}
+                render={props => <OrdersNumbersPage  {...props}  store = {store} />}
               />
               <Route path='/dashboard/'
-                render={props => <DashboardOrdersPage {...props} />}
+                render={props => <DashboardOrdersPage {...props}  store = {store} />}
               />
             </Switch>
           </Router>

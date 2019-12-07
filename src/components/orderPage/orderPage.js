@@ -13,44 +13,28 @@ class orderPage extends Component {
             return (
                 <OrderCategory
                     key={index}
+                    store = {this.props.store}
                     title={category.title}
                     categoryOptions={category.options}
+                    optionsSelections = {category.optionsSelections}
                 />
             );
         });
     }
 
     render() {
-        let categories = [{
-            title: 'Base (required)',
-            options: ['Vanilla', 'Chocolate', 'Coffee', 'Mango', 'Strawberry', 'Lemon']
-        },
-        {
-            title: 'Nuts',
-            options: ['Almonds', 'Pistachios', 'Walnuts', 'Cashews', 'Pecans', 'Hazelnuts']
-        },
-        {
-            title: 'Sauces',
-            options: ['Chocolate', ' Salted Caramel', 'Toffee', 'Maple']
-        },
-        {
-            title: 'Fruits',
-            options: ['Strawberry', 'Mango', 'Raspberry', 'Banana']
-        },
-        {
-            title: 'baked yumminess',
-            options: ['Dount', 'Cookies']
-        },
-
-        ];
+       
         return (<div className="OrderPage">
-            <Order title={'Creamate your own icecream'}>
-                {this.composeCategories(categories)}
+            <Order title={'Creamate your own icecream'}
+                            store = {this.props.store}
+                            >
+                {this.composeCategories(this.props.store.categories)}
             </Order>
             <Link to={'/user/' + this.props.match.params.userId + '/success/'}>
                 <Button
                     style={{ marginTop: '20px' }}
                     text={'Submit Order'}
+                    onClick = {this.props.store.createOrder.bind(this.props.store)}
                 />
             </Link>
             <div style={{ height: '20px' }}>

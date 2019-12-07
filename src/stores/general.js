@@ -14,12 +14,45 @@ class GeneralStore {
     this.ordersPerUser = [];
     this.userID = "01011";
     this.userName = "Hmmmm";
+
+    this.categories = [{
+      title: 'Base (required)',
+      options: ['Vanilla', 'Chocolate', 'Coffee', 'Mango', 'Strawberry', 'Lemon'],
+      optionsSelections: [false, false, false, false, false, false]
+
+  },
+  {
+      title: 'Nuts',
+      options: ['Almonds', 'Pistachios', 'Walnuts', 'Cashews', 'Pecans', 'Hazelnuts'],
+      optionsSelections: [false, false, false, false, false, false]
+
+  },
+  {
+      title: 'Sauces',
+      options: ['Chocolate', ' Salted Caramel', 'Toffee', 'Maple'],
+      optionsSelections: [false, false, false, false, ]
+
+  },
+  {
+      title: 'Fruits',
+      options: ['Strawberry', 'Mango', 'Raspberry', 'Banana'],
+      optionsSelections: [false, false, false, false, ]
+
+  },
+  {
+      title: 'baked yumminess',
+      options: ['Dount', 'Cookies'],
+      optionsSelections: [false, false,]
+
+  },
+
+  ];
+    
   }
 
 
   setUpFireBase() {
-    setTimeout(
-      function () {
+
         var config = {
           apiKey: "AIzaSyAvv8HXDFBw8IWJHzGLAqpLKJyATrxxryE",
           authDomain: "projectId.firebaseapp.com",
@@ -56,7 +89,7 @@ class GeneralStore {
               if (object.val().status.toLowerCase() == "cancelled")
                 cancelled.push(object.val());
               /// fetch user orders
-              if (object.val().userID.toLowerCase() == _this.userID)
+              if (object.val().userID == _this.userID)
                 ordersPerUser.push(object.val());
             });
             _this.ordered = ordered;
@@ -67,16 +100,18 @@ class GeneralStore {
 
             /// fetch user orders
             _this.ordersPerUser = ordersPerUser;
-          });
-      }
-        .bind(this),
-      1000
-    );
+          })
+      
+        .bind(this);
+    
   }
 
 
   createOrder() {
     console.log("hey");
+    // let _this = this;
+    console.log(this);
+    
     var orderObject = {
       id: this.totalOrdersCount,
       uid: "",
@@ -96,13 +131,13 @@ class GeneralStore {
       .database()
       .ref("creamatorium/orders")
       .push()
-      .key();
+      .key;
 
     orderObject.uid = uid;
     var updates = {};
     updates["/creamatorium/orders/" + uid + "/"] = orderObject;
 
-    return firebase
+     firebase
       .database()
       .ref()
       .update(updates);
