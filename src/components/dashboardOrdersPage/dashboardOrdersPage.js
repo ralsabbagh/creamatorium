@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 class DashboardOrdersPage extends Component {
 
-    composeTableRow(orderIdColumn, orderDetails, orderStatus, key, color) {
+    composeTableRow(orderIdColumn, orderDetails, orderStatus, button, key, color) {
         return (
             <div className="ordersTableHeader" key={key}>
                 <div className="orderIdColumn" style={{ color: color }}>
@@ -17,7 +17,9 @@ class DashboardOrdersPage extends Component {
                     <h3>{orderDetails}</h3>
                 </div>
                 <div className="orderStatus" style={{ color: color }}>
-                    <h3>{orderStatus}</h3>
+                    {button ? <Button
+                        text={orderStatus}
+                    ></Button> : <h3>{orderStatus}</h3>}
                 </div>
             </div>
         );
@@ -25,7 +27,7 @@ class DashboardOrdersPage extends Component {
 
     composeOrdersRows(orders) {
         return orders.map((order, index) => {
-            return this.composeTableRow(order.id, order.specification, order.status, index, 'gray')
+            return this.composeTableRow(order.id, order.specification, order.status, true, index, 'gray')
         });
     }
     render() {
@@ -54,8 +56,8 @@ class DashboardOrdersPage extends Component {
         return (<div className="DashboardOrdersPage">
             <h1>{'Orders'}</h1>
             <div style={{ marginBottom: '50px' }}></div>
-            <div className='borderedContainer'>
-                {this.composeTableRow('#', 'order', 'status')}
+            <div className='borderedContainer' style={{ padding: '15px' }}>
+                {this.composeTableRow('#', 'order', 'status', false)}
                 {this.composeOrdersRows(orders)}
             </div>
         </div>
